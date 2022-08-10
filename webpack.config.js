@@ -2,17 +2,24 @@ const path = require('path');
 
 module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: './src/index.jsx',
     output: {
         path: path.join(__dirname, 'build'),
         filename: 'bundle.js'
     },
+    resolve: {
+        extensions: ['.js', '.json', '.jsx']
+    },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test:/\.(js|jsx)$/,
+                include: path.resolve(__dirname, 'src'),
                 exclude: /node_modules/,
-                loader: 'babel-loader'
+                loader: 'babel-loader',
+                options: {
+                    babelrc: true
+                }
             },
             {
                 test: /\.scss$/,
